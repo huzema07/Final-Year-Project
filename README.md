@@ -5,6 +5,7 @@ A deep learning project that classifies chest X-ray images as either **NORMAL** 
 ## 📋 Project Overview
 
 This project implements medical image classification using:
+
 - **Inception ResNetV2**
 - **VGG16**
 - **Xception**
@@ -12,6 +13,7 @@ This project implements medical image classification using:
 Each model is trained with transfer learning on ImageNet weights, fine-tuned on the chest X-ray dataset, and evaluated using confusion matrices and ROC curves. An ensemble approach combines predictions from all three models for improved accuracy.
 
 ### Key Features
+
 - ✅ Transfer learning with pre-trained ImageNet weights
 - ✅ Grad-CAM implementation for model interpretability
 - ✅ Class imbalance handling with weighted loss
@@ -35,12 +37,14 @@ Dataset/
 ```
 
 The dataset contains chest X-ray images categorized into two classes:
+
 - **NORMAL**: Healthy chest X-rays
 - **PNEUMONIA**: Chest X-rays showing pneumonia
 
 ## 🚀 Getting Started
 
 ### Prerequisites
+
 - Python 3.7+
 - TensorFlow/Keras
 - NumPy, Pandas
@@ -50,18 +54,21 @@ The dataset contains chest X-ray images categorized into two classes:
 ### Installation
 
 1. Clone the repository:
+
 ```bash
 git clone https://github.com/yourusername/XAI_code.git
 cd XAI_code
 ```
 
 2. Create a virtual environment:
+
 ```bash
 python -m venv ml_env
 source ml_env/Scripts/activate  # On Windows
 ```
 
 3. Install dependencies:
+
 ```bash
 pip install tensorflow keras numpy pandas matplotlib seaborn scikit-learn
 ```
@@ -73,6 +80,7 @@ pip install tensorflow keras numpy pandas matplotlib seaborn scikit-learn
 ### Running the Notebook
 
 Open the Jupyter notebook and execute cells sequentially:
+
 ```bash
 jupyter notebook XAI.ipynb
 ```
@@ -82,13 +90,15 @@ Or run in Google Colab by uploading the notebook and dataset to Google Drive.
 ## 📊 Model Architecture
 
 ### Base Configuration
+
 - **Input Size**: 299 × 299 pixels (RGB)
-- **Image Preprocessing**: 
+- **Image Preprocessing**:
   - Rescaling: 1/255
   - Data augmentation: zoom, shift, brightness adjustments
   - Target size normalization
 
 ### Training Configuration
+
 - **Batch Size**: 32
 - **Training Epochs**: 3 (initial)
 - **Fine-tuning Epochs**: 5
@@ -98,11 +108,13 @@ Or run in Google Colab by uploading the notebook and dataset to Google Drive.
 - **Early Stopping**: Patience=10, min_delta=0.001
 
 ### Class Weights
+
 Balanced class weights are computed to handle dataset imbalance between NORMAL and PNEUMONIA classes.
 
 ## 🔍 Explainability: Grad-CAM
 
 Grad-CAM (Gradient-weighted Class Activation Mapping) generates visual explanations of model predictions:
+
 - Highlights the regions of the image that most influenced the classification
 - Implemented for each model with their respective last convolutional layers:
   - **Inception**: `conv_7b_ac`
@@ -112,6 +124,7 @@ Grad-CAM (Gradient-weighted Class Activation Mapping) generates visual explanati
 ## 📈 Performance Metrics
 
 ### Evaluation Outputs
+
 1. **Accuracy & Loss**: Training and validation curves
 2. **Confusion Matrix**: Per-model and ensemble predictions
 3. **ROC Curves**: AUC-ROC for binary classification
@@ -120,6 +133,7 @@ Grad-CAM (Gradient-weighted Class Activation Mapping) generates visual explanati
 ## 🔗 Ensemble Learning
 
 The ensemble combines predictions from all three models by averaging their output probabilities:
+
 ```python
 ensemble_preds = (inception_preds + vgg16_preds + xception_preds) / 3.0
 ```
@@ -140,7 +154,9 @@ This typically provides more robust and reliable predictions than individual mod
 ## 🛠️ Customization
 
 ### Modify Training Parameters
+
 Edit the **Overall Settings** cell:
+
 ```python
 FINE_TUNING_EPOCHS = 5
 TRAINING_EPOCHS = 3
@@ -150,7 +166,9 @@ image_width = 299
 ```
 
 ### Change Data Augmentation
+
 Modify the `ImageDataGenerator` parameters:
+
 ```python
 gen = ImageDataGenerator(
     rescale=1./255,
@@ -162,6 +180,7 @@ gen = ImageDataGenerator(
 ```
 
 ### Add Custom Models
+
 Extend the notebook by creating additional base models before the "Model" section.
 
 ## 📚 Dependencies
@@ -179,6 +198,7 @@ scikit-learn>=1.0.0
 ## ⚠️ Notes for Google Colab Users
 
 If running in Google Colab:
+
 1. Mount Google Drive before loading the dataset
 2. Update `DATASET_BASE` path to your Google Drive location
 3. The provided code includes Google Drive mounting code (commented or active)
