@@ -70,22 +70,29 @@ source ml_env/Scripts/activate  # On Windows
 3. Install dependencies:
 
 ```bash
-pip install tensorflow keras numpy pandas matplotlib seaborn scikit-learn
+pip install -r requirements.txt
 ```
 
 4. Prepare the dataset:
-   - Place the chest X-ray dataset in a `./dataset/chest_xray/` folder
+   - Place the chest X-ray dataset in the appropriate location:
+     - **Google Colab**: Upload to `Google Drive/Dataset/chest_xray/`
+     - **Local**: Place in `./Dataset/chest_xray/`
    - Ensure it follows the structure shown above
 
-### Running the Notebook
+### Running on Google Colab (Recommended)
 
-Open the Jupyter notebook and execute cells sequentially:
+1. Upload the notebook (`XAI.ipynb`) to Google Colab
+2. Upload the `chest_xray` dataset to your Google Drive under `Dataset/chest_xray/`
+3. In Colab: **Runtime > Change runtime type > GPU (T4)**
+4. Run all cells sequentially — the notebook will mount Google Drive and load the dataset automatically
+
+### Running Locally
 
 ```bash
 jupyter notebook XAI.ipynb
 ```
 
-Or run in Google Colab by uploading the notebook and dataset to Google Drive.
+Update `DATASET_BASE` in the notebook to point to your local dataset path.
 
 ## 📊 Model Architecture
 
@@ -122,6 +129,14 @@ Grad-CAM (Gradient-weighted Class Activation Mapping) generates visual explanati
   - **Xception**: `block14_sepconv2_act`
 
 ## 📈 Performance Metrics
+
+### Model Results
+
+| Model | Test Accuracy |
+|---|---|
+| InceptionResNetV2 | 87.66% |
+| VGG16 | 92.47% |
+| Xception | 87.34% |
 
 ### Evaluation Outputs
 
@@ -185,23 +200,21 @@ Extend the notebook by creating additional base models before the "Model" sectio
 
 ## 📚 Dependencies
 
+See [requirements.txt](requirements.txt) for the full list. Install with:
+
+```bash
+pip install -r requirements.txt
 ```
-tensorflow>=2.10.0
-keras>=2.11.0
-numpy>=1.21.0
-pandas>=1.3.0
-matplotlib>=3.5.0
-seaborn>=0.11.0
-scikit-learn>=1.0.0
-```
+
+> **Note**: When running on Google Colab, all dependencies are pre-installed.
 
 ## ⚠️ Notes for Google Colab Users
 
-If running in Google Colab:
-
-1. Mount Google Drive before loading the dataset
-2. Update `DATASET_BASE` path to your Google Drive location
-3. The provided code includes Google Drive mounting code (commented or active)
+- The notebook is configured to run on **Google Colab with GPU (T4)** out of the box
+- Google Drive is mounted automatically in the setup cell
+- Dataset path is set to `/content/drive/MyDrive/Dataset/chest_xray`
+- Ensure your dataset is placed at that path in Google Drive
+- Use **Runtime > Change runtime type > GPU** for faster training
 
 ## 📖 References
 
